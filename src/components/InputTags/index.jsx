@@ -12,8 +12,8 @@ export function InputTags({title, tags, onAdd, onRemove, onChange, ...rest}){
       {title && <p>{title}</p>}
       <InputContainer>
         {tags && 
-          tags.map(tag => 
-          <Tag title={tag} onClick={handleRemoveTag} />)
+          tags.map((tag, index) => 
+          <Tag key={index} title={tag} onClick={handleRemoveTag} />)
         }
         <Tag 
           onClick={onAdd} 

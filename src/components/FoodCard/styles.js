@@ -35,6 +35,9 @@ export const Container = styled.div`
     >img{
       width: 176px;
       height: 176px;
+
+      
+      object-fit: contain;      
     }
   }
 `;

@@ -7,10 +7,13 @@ import { IconButton } from "../IconButton";
 import { Stepper } from "../Stepper";
 
 import { useState } from "react";
+import { useAuth } from "../../hooks/auth";
 
-import user from "../../utils/user";
+import imgPlaceholder from "../../assets/placeholder.svg"
+import { api } from "../../services/api";
 
 export function FoodCard({food}){
+  const { user } = useAuth();
 
   const navigate = useNavigate();
 
@@ -42,11 +45,13 @@ export function FoodCard({food}){
     }
   }
   
+  const imageUrl = food.img ? `${api.defaults.baseURL}/files/${food.img}` : imgPlaceholder;
+  
   return(
     <Container data-prato-id={food.id}>      
       <IconButton icon={getIcon()} data-move-to-corner onClick={handleIconClick}  />     
 
-      <img src={food.img} />
+      <img src={imageUrl} />
 
       <ProductName onClick={e => navigate(`/prato/${food.id}`)}>
         {food.name}

@@ -65,6 +65,8 @@ export const ImgContainer = styled.div`
     width: 100%;
     max-width: 320px;
     padding: 0 26px;
+    aspect-ratio: 1;
+    object-fit: contain;
 
     @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
       max-width: 500px;

@@ -13,8 +13,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import foodList from "../../utils/foodList";
 import user from "../../utils/user";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../../components/Button";
+
+import imgPlaceholder from "../../assets/placeholder.svg"
+import { api } from "../../services/api";
 
 export function Prato(){
   const navigate = useNavigate();
@@ -26,7 +29,6 @@ export function Prato(){
   }
 
   const [quantity, setQuantity] = useState(1);
-
   function handleAddQuantity(){
     if(quantity < 99)
       setQuantity(quantity + 1);
@@ -37,7 +39,19 @@ export function Prato(){
       setQuantity(quantity - 1);
   }       
 
-  const food = foodList[params.id];   
+  const [food, setFood] = useState({});  
+
+  useEffect(() => {
+    async function fetch(){      
+      const response = await api.get(`/pratos/${params.id}`);
+      //console.log(response.data);
+      setFood(response.data);
+    }
+    
+    fetch();    
+  }, []);
+
+  const imageUrl = food.img ? `${api.defaults.baseURL}/files/${food.img}` : imgPlaceholder;
 
   return (
     <Container>
@@ -46,19 +60,20 @@ export function Prato(){
       {isMenuActive && <MenuMobile /> }
       {!isMenuActive && 
         <Content>
-          <Voltar onClick={e => navigate(-1)}>
+          <Voltar onClick={() => navigate(-1)}>
             <MdArrowBackIos />
             voltar
           </Voltar>
           <PratoContainer>
             <ImgContainer>
-              <img src={food.img} />          
+              <img src={imageUrl} />          
             </ImgContainer>
             <InfoContainer>
               <h2>{food.name}</h2>
               <p>{food.description}</p>          
               <Tags>
-                {food.ingredientes.map((tag, index) =>                  
+                {food.ingredientes && 
+                food.ingredientes.map((tag, index) =>                  
                   <span key={index}>{tag}</span>
                 )}   
               </Tags>

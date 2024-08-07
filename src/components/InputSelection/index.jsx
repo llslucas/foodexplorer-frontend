@@ -10,8 +10,8 @@ export function InputSelection({title, ...rest}){
         <CreatableSelect
           className="select-input"  
           classNamePrefix="select"                            
-          formatCreateLabel={inputValue => `Criar categoria ${inputValue}`}                 
-          isClearable         
+          formatCreateLabel={inputValue => `Criar categoria "${inputValue}"`}              
+          isClearable 
           isSearchable
           unstyled          
           {...rest}
