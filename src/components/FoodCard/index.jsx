@@ -18,6 +18,7 @@ export function FoodCard({food}){
   const navigate = useNavigate();
 
   const [quantity, setQuantity] = useState(1);
+  const [isFavorite, setFavorite] = useState(food.isFavorite);
 
   function handleAddQuantity(){
     if(quantity < 99)
@@ -32,16 +33,17 @@ export function FoodCard({food}){
   function getIcon(){
     if(user.isAdmin === true){
       return PiPencilSimple;
-    }else{
-      return food.favorite ? PiHeartFill : PiHeartBold;
+    }else{ 
+      return isFavorite ? PiHeartFill : PiHeartBold;
     }
   }
 
-  function handleIconClick(){
+  async function handleIconClick(){
     if(user.isAdmin === true){
       navigate(`/edit/${food.id}`);
     }else{
-      
+      const response = await api.post(`/favoritos/${food.id}`);
+      setFavorite(response.data);
     }
   }
   
