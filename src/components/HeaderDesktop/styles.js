@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints";
 
 export const Container = styled.header`
   grid-area: header;
@@ -15,4 +16,8 @@ export const Container = styled.header`
   padding: 28px 123px;
 
   background-color: ${({theme}) => theme.COLORS.DARK_600};    
+
+  @media (max-width: ${DEVICE_BREAKPOINTS.LG}) {
+      display: none;
+  }
 `;
