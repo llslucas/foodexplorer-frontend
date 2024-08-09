@@ -38,8 +38,10 @@ export function Edit(){
   } 
 
   function handleTagAdd(){   
-    setIngredientes([...ingredientes, newIngrediente]);
-    setNewIngrediente("");
+    if(newIngrediente){
+      setIngredientes([...ingredientes, newIngrediente]);
+      setNewIngrediente("");
+    }    
   }
   
   function handleTagRemove(tag){   

@@ -34,6 +34,7 @@ export function SignUp(){
     try{
       const response = await api.post("/users", {name, email, password});      
       alert("Usuário criado com sucesso!");
+      navigate('/');
     }catch(e){
       alert(e.response.data.message); 
     }
