@@ -23,17 +23,17 @@ export function Home(){
 
   useEffect(() => {
     async function fetchPratos(){      
-        const response = await api.get(`/pratos?search=${search}`);     
+        const response = await api.get(`/pratos?search=${search}`);
         //console.log(response.data);    
         const pratos = response.data;
-        setPratos(pratos);      
+        setPratos(pratos);
 
         const categories = pratos.map(prato => prato.category);
         const uniqueCategories = [... new Set(categories)];        
 
         setCategories(uniqueCategories);
     };   
-   
+    
     fetchPratos();    
   }, [search])
 
