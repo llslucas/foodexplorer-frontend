@@ -62,6 +62,10 @@ export function New(){
   }
 
   async function handleSavePrato(){   
+    if(ingredientes.length === 0){
+      return alert("Você deve incluir ao menos um ingrediente");
+    }
+
     try{
       const prato = {      
         name,
